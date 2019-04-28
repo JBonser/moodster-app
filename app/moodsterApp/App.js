@@ -7,37 +7,103 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import {
+   AppRegistry,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  Animated
+} from 'react-native';
 
 type Props = {};
-export default class App extends Component<Props> {
+
+
+
+export default class HomeMenu extends Component<Props> {
+  constructor(props)
+    {
+        super(props);
+
+        this.Animation = new Animated.Value(0);
+    }
+
+  componentWillMount() {
+    this.animatedValue = new Animated.Value(0);
+  }
+  componentDidMount() {
+    this.StartBackgroundColorAnimation();
+
+    Animated.timing(this.animatedValue, {
+      toValue: 150,
+      duration: 1500
+    }).start();
+  }
+
+  StartBackgroundColorAnimation = () =>
+      {
+          this.Animation.setValue(0);
+
+          Animated.timing(
+              this.Animation,
+              {
+                  toValue: 1,
+                  duration: 15000
+              }
+          ).start(() => { this.StartBackgroundColorAnimation() });
+      }
+
   render() {
+    const BackgroundColorConfig = this.Animation.interpolate(
+       {
+           inputRange: [ 0, 0.2, 0.4, 0.6, 0.8, 1 ],
+
+           outputRange: [ '#A32823', '#3F51B5', '#009688', '#03A9F4', '#3F51B5', '#A32823' ]
+
+       });
+
+    const interpolateColor = this.animatedValue.interpolate({
+      inputRange: [0, 150],
+      outputRange: ['rgb(0,0,0)', 'rgb(51, 250, 170)']
+    })
+
+    const animatedStyle = {
+      backgroundColor: interpolateColor,
+      transform: [
+        { translateY: this.animatedValue }
+      ]
+    }
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+
+      <Animated.View style = {[ styles.MainContainer, { backgroundColor: BackgroundColorConfig } ]}>
+
+        <Text style={styles.welcome}>Moodsters</Text>
+        <Text style={styles.instructions}>Version 0.03</Text>
+
+      </Animated.View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  MainContainer:
+    {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
+        marginTop: (Platform.OS == 'ios') ? 20 : 0
+    },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F5FCFF'
+
   },
   welcome: {
-    fontSize: 20,
+    fontFamily: 'Roboto',
+    fontSize: 40,
     textAlign: 'center',
     margin: 10,
   },
@@ -46,4 +112,8 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  box: {
+    width: 100,
+    height: 100,
+  }
 });
