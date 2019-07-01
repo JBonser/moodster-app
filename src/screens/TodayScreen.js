@@ -6,7 +6,8 @@ import Marble from '../components/Marble';
 
 class TodayScreen extends Component {
     render() {
-        //todo: these colors will pull through from the database and be set accordingly, also number of marbles, marble labels etc will be controlled in this way
+        //todo: these colors will pull through from the database and be set accordingly, 
+        //also number of marbles, marble labels etc will be controlled in this way
         const happyMarble = '#A32823';
         const sadMarble = '#3F51B5';
         const angryMarble = '#009688';
@@ -15,15 +16,14 @@ class TodayScreen extends Component {
 
         return (
         <View style={{ flex: 1, backgroundColor: '#ddd', height: 500 }}>
-    
         <View style={styles.ballContainer} >
-        <View style={styles.row}>
-            <Marble marbleColor={fumingMarble} />
-            <Marble marbleColor={happyMarble} />
-            <Marble marbleColor={okMarble} />
-            <Marble marbleColor={sadMarble} />
-            <Marble marbleColor={angryMarble} />
-        </View>
+            <View style={styles.row}>
+                <Marble marbleColor={fumingMarble} marbleMargin={0} />
+                <Marble marbleColor={happyMarble} marbleMargin={40} />
+                <Marble marbleColor={okMarble} marbleMargin={0} />
+                <Marble marbleColor={sadMarble} marbleMargin={40} />
+                <Marble marbleColor={angryMarble} marbleMargin={0} />
+            </View>
         </View>
         <View style={styles.dropZone}>
             <Text style={styles.text}>Put your balls here</Text>
@@ -42,32 +42,35 @@ TodayScreen.navigationOptions = {
         />
     )
 };
+
 const styles = StyleSheet.create({
     mainContainer: {
-      flex: 1
+        flex: 1
     },
     ballContainer: {
-      height: 200
+        marginTop: 50,
+        height: 300
     },
     row: {
-      flexDirection: 'row'
+        flexDirection: 'row'
     },  
     dropZone: {
         opacity: 0.2,
-      height: 200,
-      backgroundColor: "#00334d",
+        height: 200,
+        backgroundColor: '#00334d',
         flex: 1,
         justifyContent: 'flex-end',
         marginBottom: 36
     },
     text: {
-      marginTop: 25,
-      marginLeft: 5,
-      marginRight: 5,
-      textAlign: 'center',
-      color: '#fff',
-      fontSize: 25,
-      fontWeight: 'bold'
+        marginTop: 25,
+        marginLeft: 5,
+        marginRight: 5,
+        textAlign: 'center',
+        color: '#fff',
+        fontSize: 25,
+        fontWeight: 'bold'
     }
   });
+
 export default TodayScreen;

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { createAppContainer } from 'react-navigation';
-import AppSwitchNavigation from './components/AppSwitchNavigation';
-import store from './store';
+import AppSwitchNavigation from './src/components/AppSwitchNavigation';
+import store from './src/store';
 
 // const MainNavigator = createStackNavigator({
 //   Main: { screen: HomeScreen }
