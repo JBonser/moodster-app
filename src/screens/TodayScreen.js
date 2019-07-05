@@ -1,33 +1,64 @@
+
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native'; 
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'; 
 import Icon from 'react-native-vector-icons/Ionicons';
 import Marble from '../components/Marble';
 // import { STATUS_BAR_HEIGHT } from '../constants';
 
 class TodayScreen extends Component {
-    render() {
-        //todo: these colors will pull through from the database and be set accordingly, 
-        //also number of marbles, marble labels etc will be controlled in this way
-        const happyMarble = '#A32823';
-        const sadMarble = '#3F51B5';
-        const angryMarble = '#009688';
-        const fumingMarble = '#e1db4a';
-        const okMarble = '#03A9F4';
 
+    constructor(props) {
+        super(props);
+
+      this.state = {
+          selectedMarble: '',
+          moodTemplate: 'unassigned',
+          moods: []
+      };
+    }
+
+    componentDidMount() {
+        // const moodTemplate = fetch('http://localhost:5000/mood_templates/5d86024b-1bae-42f1-8a2c-028fe18e33e0')
+        //     .then((response) => response.json())
+        //     .then((responseJson) => {
+        //         console.log(responseJson);
+        //             this.setState({
+        //                 moodTemplate: responseJson.data,
+        //             }); 
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     });
+
+        //todo api needs updating to enable selecting all the moods from a particular mood template   
+        return fetch('http://127.0.0.1:5000/moods/')
+        .then((response) => response.json())
+        .then((responseJson) => {
+            console.log(responseJson);
+                this.setState({
+                    moods: responseJson.data,
+                });
+        })
+        .catch((error) => {
+            console.log(error);
+        });   
+    } 
+
+    render() {
         return (
         <View style={{ flex: 1, backgroundColor: '#ddd', height: 500 }}>
-        <View style={styles.ballContainer} >
-            <View style={styles.row}>
-                <Marble marbleColor={fumingMarble} marbleMargin={0} />
-                <Marble marbleColor={happyMarble} marbleMargin={40} />
-                <Marble marbleColor={okMarble} marbleMargin={0} />
-                <Marble marbleColor={sadMarble} marbleMargin={40} />
-                <Marble marbleColor={angryMarble} marbleMargin={0} />
+            <Text>{this.state.moodTemplate.id}</Text>
+            <Text style={styles.selectedMarbleText}>{this.state.moods.selectedMarble}</Text>
+            <View style={styles.ballContainer} >
+                <View style={styles.row}>
+                    {this.state.moods.map(
+                        mood => <Marble key={mood.id} marbleColor={mood.colour} marbleMargin={0} />
+                    )}    
+                </View>
             </View>
-        </View>
-        <View style={styles.dropZone}>
-            <Text style={styles.text}>Put your balls here</Text>
-        </View>
+            <View style={styles.dropZone}>
+                <Text style={styles.text}>Put your balls here</Text>
+            </View>
         </View>
         );
     }
@@ -52,7 +83,8 @@ const styles = StyleSheet.create({
         height: 300
     },
     row: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'space-evenly'
     },  
     dropZone: {
         opacity: 0.2,

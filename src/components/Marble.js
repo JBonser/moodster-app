@@ -30,6 +30,16 @@ export default class Marble extends Component {
             onPanResponderMove: Animated.event([ 
             null, { dx: this.state.pan.x, dy: this.state.pan.y }
             ]),
+            onPanResponderStart:(e, gesture) => {
+                    Animated.timing(this.state.opacity, {
+                    toValue: 0,
+                    duration: 1000
+                    }).start(() =>
+                    this.setState({
+                        showDraggable: false
+                    })
+                    ); 
+            },
             onPanResponderRelease: (e, gesture) => {
             if (this.isDropArea(gesture)) {
                 Animated.timing(this.state.opacity, {
