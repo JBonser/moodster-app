@@ -16,11 +16,11 @@ export default class Marble extends Component {
 
     componentWillMount() {
         this.val = { x: 0, y: 0 };
-        this.state.pan.addListener((value) => this.val = value);
+        this.state.pan.addListener(value => { this.val = value; });
 
         this.panResponder = PanResponder.create({
-            onStartShouldSetPanResponder: (e, gesture) => true,
-            onPanResponderGrant: (e, gesture) => {
+            onStartShouldSetPanResponder: () => true,
+            onPanResponderGrant: () => {
             this.state.pan.setOffset({
                 x: this.val.x,
                 y: this.val.y
@@ -30,7 +30,7 @@ export default class Marble extends Component {
             onPanResponderMove: Animated.event([ 
             null, { dx: this.state.pan.x, dy: this.state.pan.y }
             ]),
-            onPanResponderStart:(e, gesture) => {
+            onPanResponderStart: () => {
                     Animated.timing(this.state.opacity, {
                     toValue: 0,
                     duration: 1000
@@ -74,7 +74,16 @@ export default class Marble extends Component {
             <View style={{ position: 'absolute' }}>
             <Animated.View
                 {...this.panResponder.panHandlers}
-                style={[panStyle, styles.circle, { opacity: this.state.opacity, backgroundColor: this.props.marbleColor, marginTop: this.props.marbleMargin }]}
+                style={
+                    [
+                        panStyle,
+                        styles.circle,
+                        {
+                            opacity: this.state.opacity,
+                            backgroundColor: this.props.marbleColor,
+                            marginTop: this.props.marbleMargin
+                        }
+                    ]}
             />
             </View>
         );

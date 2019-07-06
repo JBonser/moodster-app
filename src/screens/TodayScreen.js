@@ -1,9 +1,9 @@
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'; 
+import { View, Text, StyleSheet } from 'react-native'; 
 import Icon from 'react-native-vector-icons/Ionicons';
 import Marble from '../components/Marble';
-// import { STATUS_BAR_HEIGHT } from '../constants';
+
 
 class TodayScreen extends Component {
 
@@ -30,7 +30,7 @@ class TodayScreen extends Component {
         //         console.log(error);
         //     });
 
-        //todo api needs updating to enable selecting all the moods from a particular mood template   
+        //todo api needs updating to enable selecting all the moods from a particular mood template
         return fetch('http://127.0.0.1:5000/moods/')
         .then((response) => response.json())
         .then((responseJson) => {

@@ -1,6 +1,5 @@
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { StyleSheet } from 'react-native';
-// import HomeScreen from './../screens/HomeScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import TodayScreen from '../screens/TodayScreen';
 import SettingsScreen from '../screens/SettingsScreen';

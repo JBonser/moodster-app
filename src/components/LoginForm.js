@@ -21,7 +21,6 @@ class LoginForm extends Component {
                     placeholderTextColor="#ffffff"
                     selectionColor="#fff"
                     keyboardType="email-address"
-                    //   onSubmitEditing={()=> this.password.focus()}
                 />
                 <TextInput 
                     style={styles.inputBox} 
@@ -29,7 +28,6 @@ class LoginForm extends Component {
                     placeholder="Password"
                     secureTextEntry={true}
                     placeholderTextColor="#ffffff"
-                    //   ref={(input) => this.password = input}
                 />  
                 <TouchableOpacity 
                     onPress={() => this.props.navigation.navigate('Dashboard')}

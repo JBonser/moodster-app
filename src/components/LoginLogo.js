@@ -9,10 +9,6 @@ export default class Logo extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-                {/* <Image 
-                    style={{ width: 40, height: 70 }}
-                    source={('../assets/icons/logo.png')} 
-                /> */}
                 <Text style={styles.logoText}>Moodster</Text>	
 			</View>
         );
