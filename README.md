@@ -1,7 +1,7 @@
 # Moodster
 Moodster Application Project
 
-# Setting up the Development Environment
+## Setting up the Development Environment
 
 Go to https://facebook.github.io/react-native/docs/getting-started.html, and select the **React Native CLI Quickstart** tab as this project doesn't use Expo. **Follow these instructions to setup your development environment.**
 
@@ -16,7 +16,7 @@ You will need Node, Watchman, the React Native command line interface, and Xcode
 *Note: A Mac is required to build projects with native code for iOS.*
 
 
-# Running the App
+## Running the App
 Once you've installed the relevant dependancies and have either a phyiscal/virtual device connected. Run the following commands
 ```
 cd moodster-app
@@ -34,7 +34,7 @@ react-native run-ios
 ```
 
 For the app to connect to the local API correctly, follow the installation steps for https://github.com/JBonser/moodster-api.
-If you are running the app on a phyiscal device, the device will need to be on the same network as the host machine and you will need to follow these steps:
+If you are running the app on a physical device, the device will need to be on the same network as the host machine and you will need to follow these steps:
 
 ### Android
 
