@@ -1,5 +1,4 @@
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
-import { StyleSheet } from 'react-native';
 import HistoryScreen from '../screens/HistoryScreen';
 import TodayScreen from '../screens/TodayScreen';
 import SettingsScreen from '../screens/SettingsScreen';
@@ -16,9 +15,7 @@ export default createMaterialBottomTabNavigator({
     labeled: true,
     shifting: true,
     barStyle: {
-      backgroundColor: '#c63535',
-      borderTopWidth: StyleSheet.hairlineWidth,
-      borderStyle: 'solid',
-      borderColor: '#d0cfd0',
+      backgroundColor: '#000',
+     
     },
   });
