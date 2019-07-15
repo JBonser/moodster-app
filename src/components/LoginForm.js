@@ -5,39 +5,39 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity 
+  TouchableOpacity
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 class LoginForm extends Component {
 
-	render() {
-		return (
-			<View style={styles.container}>
-                <TextInput 
-                    style={styles.inputBox} 
-                    underlineColorAndroid='rgba(0,0,0,0)' 
-                    placeholder="Email"
-                    placeholderTextColor="#ffffff"
-                    selectionColor="#fff"
-                    keyboardType="email-address"
-                />
-                <TextInput 
-                    style={styles.inputBox} 
-                    underlineColorAndroid='rgba(0,0,0,0)' 
-                    placeholder="Password"
-                    secureTextEntry={true}
-                    placeholderTextColor="#ffffff"
-                />  
-                <TouchableOpacity 
-                    onPress={() => this.props.navigation.navigate('Dashboard')}
-                    style={styles.button}
-                >
-                    <Text style={styles.buttonText}>{this.props.type}</Text>
-                </TouchableOpacity>     
-            </View>
-			);
-	}
+  render() {
+    return (
+      <View style={styles.container}>
+        <TextInput
+          style={styles.inputBox}
+          underlineColorAndroid='rgba(0,0,0,0)'
+          placeholder="Email"
+          placeholderTextColor="#ffffff"
+          selectionColor="#fff"
+          keyboardType="email-address"
+        />
+        <TextInput
+          style={styles.inputBox}
+          underlineColorAndroid='rgba(0,0,0,0)'
+          placeholder="Password"
+          secureTextEntry={true}
+          placeholderTextColor="#ffffff"
+        />
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate('Dashboard')}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>{this.props.type}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 }
 
 export default withNavigation(LoginForm);
@@ -61,9 +61,9 @@ const styles = StyleSheet.create({
   button: {
     width: 300,
     backgroundColor: 'black',
-     borderRadius: 25,
-      marginVertical: 10,
-      paddingVertical: 13
+    borderRadius: 25,
+    marginVertical: 10,
+    paddingVertical: 13
   },
   buttonText: {
     fontSize: 16,
@@ -71,5 +71,5 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     textAlign: 'center'
   }
-  
+
 });

@@ -11,7 +11,7 @@ class TodayScreen extends Component {
         super(props);
 
         this.state = {
-            selectedMarbleColor: '',
+            selectedMarbleColor: 'white',
             selectedMarble: '',
             moodTemplate: 'unassigned',
             moods: []
