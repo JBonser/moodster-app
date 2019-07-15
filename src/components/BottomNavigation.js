@@ -5,17 +5,16 @@ import SettingsScreen from '../screens/SettingsScreen';
 import TeamScreen from '../screens/TeamScreen';
 
 export default createMaterialBottomTabNavigator({
-    
-    Today: { screen: TodayScreen },
-    History: { screen: HistoryScreen },
-    Team: { screen: TeamScreen },
-    Settings: { screen: SettingsScreen },
-  },
+
+  Today: { screen: TodayScreen },
+  History: { screen: HistoryScreen },
+  Team: { screen: TeamScreen },
+  Settings: { screen: SettingsScreen },
+},
   {
     labeled: true,
     shifting: true,
     barStyle: {
       backgroundColor: '#000',
-     
     },
   });

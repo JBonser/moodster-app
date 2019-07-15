@@ -8,13 +8,11 @@ import store from './src/store';
 class App extends Component {
   render() {
     return (
-      
+
       <AppContainer>
-        
-            <Provider store={store} ><StatusBar hidden={true} /></Provider>
-        
+        <Provider store={store} ><StatusBar hidden /></Provider>
       </AppContainer>
-      
+
     );
   }
 }
