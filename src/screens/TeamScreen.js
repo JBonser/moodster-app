@@ -21,13 +21,12 @@ class TeamScreen extends Component {
     render() {
         return (
             <View style={{ flex: 1, backgroundColor: '#fff' }}>
-
                 {
                     teamList.map((l, i) => (
-                        <View>
+                        <View key={i}>
                             <ListItem
-                                key={i}
                                 leftAvatar={{ source: { uri: l.avatar_url } }}
+                                
                                 title={l.name}
                                 subtitle={l.subtitle}
                             />
