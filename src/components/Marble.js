@@ -27,7 +27,6 @@ export default class Marble extends Component {
                 });
                 this.state.pan.setValue({ x: 0, y: 0 });
                 this.props.updateMarbleText(this.props.marbleName, this.props.marbleColor);
-                console.log(this.props.marbleColor);
             },
             onPanResponderMove: Animated.event([
                 null, { dx: this.state.pan.x, dy: this.state.pan.y }

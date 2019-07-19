@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-
   inputBox: {
     width: 300,
     backgroundColor: 'rgba(255, 255,255,0.2)',

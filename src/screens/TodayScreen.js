@@ -30,7 +30,7 @@ class TodayScreen extends Component {
         //     })
         //     .catch((error) => {
         //         console.log(error);
-        //     });
+        //     });"429d7f18-c3ba-498d-bbb5-08e8de928300"
 
         //todo api needs updating to enable selecting all the moods from a particular mood template
         return fetch('http://127.0.0.1:5000/moods/')
@@ -42,6 +42,17 @@ class TodayScreen extends Component {
                 });
             })
             .catch((error) => {
+                //dev grab some dummy marbles if unable to connect to dev api
+                const dummyMoods = [];
+                dummyMoods[0] = { id: 'dummyMcKenzie1', name: 'Amazing', colour: '#53d192' };
+                dummyMoods[1] = { id: 'dummyMcKenzie2', name: 'Great', colour: '#5e95ed' };
+                dummyMoods[2] = { id: 'dummyMcKenzie3', name: 'Okay', colour: '#ede357' };
+                dummyMoods[3] = { id: 'dummyMcKenzie4', name: 'Poor', colour: '#e28f53' };
+                dummyMoods[4] = { id: 'dummyMcKenzie5', name: 'Awful', colour: '#e05f4e' };
+                
+                this.setState({
+                    moods: dummyMoods
+                });
                 console.log(error);
             });
     }
