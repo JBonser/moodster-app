@@ -1,12 +1,5 @@
-/* eslint-disable react/jsx-boolean-value */
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity
-} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 class LoginForm extends Component {
@@ -26,7 +19,7 @@ class LoginForm extends Component {
           style={styles.inputBox}
           underlineColorAndroid='rgba(0,0,0,0)'
           placeholder="Password"
-          secureTextEntry={true}
+          secureTextEntry
           placeholderTextColor="#ffffff"
         />
         <TouchableOpacity
@@ -59,7 +52,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 300,
-    backgroundColor: 'black',
+    backgroundColor: '#333',
     borderRadius: 25,
     marginVertical: 10,
     paddingVertical: 13

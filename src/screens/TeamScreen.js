@@ -1,41 +1,39 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import { ListItem, Divider } from 'react-native-elements';
+import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import TeamList from '../components/TeamList';
 
-
-const teamList = [
-    {
-        name: 'Jordan Bonser',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-        subtitle: 'Team Admin'
-    },
-    {
-        name: 'Glen Eastham',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Team Member'
-    },
-];
 
 class TeamScreen extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isLoading: true,
+            index: 0,
+            routes: [
+                { key: 'team', title: 'Team' }
+            ]
+        };
+    }
     render() {
         return (
-            <View style={{ flex: 1, backgroundColor: '#fff' }}>
-                {
-                    teamList.map((l, i) => (
-                        <View key={i}>
-                            <ListItem
-                                leftAvatar={{ source: { uri: l.avatar_url } }}
-                                
-                                title={l.name}
-                                subtitle={l.subtitle}
-                            />
-                            <Divider style={{ backgroundColor: '#c4c4c4' }} />
-                        </View>
-                    ))
-
+            <TabView
+                renderTabBar={props =>
+                    <TabBar
+                        {...props}
+                        indicatorStyle={{ backgroundColor: 'white' }}
+                        style={{ backgroundColor: '#333' }}
+                    />
                 }
-            </View>
+                style={{ color: '#000' }}
+                navigationState={this.state}
+                renderScene={SceneMap({
+                    team: TeamList,
+                })}
+                initialLayout={{ width: Dimensions.get('window').width }}
+            />
         );
     }
 }
@@ -45,7 +43,7 @@ TeamScreen.navigationOptions = {
         <Icon
             name={'md-people'}
             size={20}
-            color={focused ? 'white' : 'black'}
+            color={focused ? 'white' : '#333'}
         />
     )
 };

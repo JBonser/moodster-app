@@ -49,7 +49,7 @@ class TodayScreen extends Component {
                 dummyMoods[2] = { id: 'dummyMcKenzie3', name: 'Okay', colour: '#ede357' };
                 dummyMoods[3] = { id: 'dummyMcKenzie4', name: 'Poor', colour: '#e28f53' };
                 dummyMoods[4] = { id: 'dummyMcKenzie5', name: 'Awful', colour: '#e05f4e' };
-                
+
                 this.setState({
                     moods: dummyMoods
                 });
