@@ -7,7 +7,7 @@ Go to https://facebook.github.io/react-native/docs/getting-started.html, and sel
 
 ### Windows/Linux
 
-You will need Node, the React Native command line interface, Python2, a JDK, and Android Studio.
+You will need Node, the React Native command line interface, Python, a JDK, and Android Studio.
 
 ### macOS
  
