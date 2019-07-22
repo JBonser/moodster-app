@@ -1,16 +1,39 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native'; 
+import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-// import { STATUS_BAR_HEIGHT } from '../constants';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import TeamList from '../components/TeamList';
+
 
 class TeamScreen extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isLoading: true,
+            index: 0,
+            routes: [
+                { key: 'team', title: 'Team' }
+            ]
+        };
+    }
     render() {
         return (
-        <View style={{ flex: 1, backgroundColor: '#ddd' }}>
-        {
-             <Text>Team</Text>
-        }
-        </View>
+            <TabView
+                renderTabBar={props =>
+                    <TabBar
+                        {...props}
+                        indicatorStyle={{ backgroundColor: 'white' }}
+                        style={{ backgroundColor: '#333' }}
+                    />
+                }
+                style={{ color: '#000' }}
+                navigationState={this.state}
+                renderScene={SceneMap({
+                    team: TeamList,
+                })}
+                initialLayout={{ width: Dimensions.get('window').width }}
+            />
         );
     }
 }
@@ -18,9 +41,9 @@ class TeamScreen extends Component {
 TeamScreen.navigationOptions = {
     tabBarIcon: (focused) => (
         <Icon
-         name={'md-people'}
-         size={20}
-         color={focused ? 'white' : 'black'}
+            name={'md-people'}
+            size={20}
+            color={focused ? 'white' : '#333'}
         />
     )
 };

@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, PanResponder, Animated } from 'react-native';
 
+
 export default class Marble extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-        showDraggable: true,
-        dropAreaValues: null,
-        pan: new Animated.ValueXY(),
-        opacity: new Animated.Value(1)
+            showDraggable: true,
+            dropAreaValues: null,
+            pan: new Animated.ValueXY(),
+            opacity: new Animated.Value(1)
         };
     }
-
     componentWillMount() {
         this.val = { x: 0, y: 0 };
         this.state.pan.addListener(value => { this.val = value; });
@@ -21,72 +21,82 @@ export default class Marble extends Component {
         this.panResponder = PanResponder.create({
             onStartShouldSetPanResponder: () => true,
             onPanResponderGrant: () => {
-            this.state.pan.setOffset({
-                x: this.val.x,
-                y: this.val.y
-            });
-            this.state.pan.setValue({ x: 0, y: 0 });
+                this.state.pan.setOffset({
+                    x: this.val.x,
+                    y: this.val.y
+                });
+                this.state.pan.setValue({ x: 0, y: 0 });
+                this.props.updateMarbleText(this.props.marbleName, this.props.marbleColor);
             },
-            onPanResponderMove: Animated.event([ 
-            null, { dx: this.state.pan.x, dy: this.state.pan.y }
+            onPanResponderMove: Animated.event([
+                null, { dx: this.state.pan.x, dy: this.state.pan.y }
             ]),
-            onPanResponderStart: () => {
-                    Animated.timing(this.state.opacity, {
-                    toValue: 0,
-                    duration: 1000
-                    }).start(() =>
-                    this.setState({
-                        showDraggable: false
-                    })
-                    ); 
-            },
             onPanResponderRelease: (e, gesture) => {
-            if (this.isDropArea(gesture)) {
-                Animated.timing(this.state.opacity, {
-                toValue: 0,
-                duration: 1000
-                }).start(() =>
-                this.setState({
-                    showDraggable: false
-                })
-                );
-            } else {
-                Animated.spring(this.state.pan, {
-                toValue: { x: 0, y: 0 },
-                friction: 7
-                }).start();
-            }
+                this.props.updateMarbleText('');
+                if (this.isDropArea(gesture)) {
+                    fetch('http://127.0.0.1:5000/teams/b36f4bfa-211b-4974-8231-ae8af860f4e1/members/a5f77c4d-cd3c-454c-807e-cbe1e59dca62/moods', {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            mood_id: this.props.moodID
+                        }),
+                    })
+                        .then((response) => response.json())
+                        .then((responseJson) => {
+                            console.log(responseJson);
+                            Animated.timing(this.state.opacity, {
+                                toValue: 0,
+                                duration: 1000
+                            })
+                                .start(() =>
+                                    this.setState({
+                                        showDraggable: false
+                                    })
+                                );
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                } else {
+                    Animated.spring(this.state.pan, {
+                        toValue: { x: 0, y: 0 },
+                        friction: 7
+                    }).start();
+                }
             }
         });
     }
 
     isDropArea(gesture) {
-        return gesture.moveY > 350;
+        return gesture.moveY > 400;
     }
 
     renderDraggable() {
         const panStyle = {
             transform: this.state.pan.getTranslateTransform()
         };
-        
+
         if (this.state.showDraggable) {
-        return (
-            <View style={{ position: 'absolute' }}>
-            <Animated.View
-                {...this.panResponder.panHandlers}
-                style={
-                    [
-                        panStyle,
-                        styles.circle,
-                        {
-                            opacity: this.state.opacity,
-                            backgroundColor: this.props.marbleColor,
-                            marginTop: this.props.marbleMargin
-                        }
-                    ]}
-            />
-            </View>
-        );
+            return (
+                <View style={{ position: 'absolute', marginTop: this.props.marbleMargin }}>
+                    <Animated.View
+                        {...this.panResponder.panHandlers}
+                        style={
+                            [
+                                panStyle,
+                                styles.circle,
+                                {
+                                    opacity: this.state.opacity,
+                                    backgroundColor: this.props.marbleColor,
+                                    marginTop: this.props.marbleMargin
+                                }
+                            ]}
+                    />
+                </View>
+            );
         }
     }
 
@@ -98,7 +108,7 @@ export default class Marble extends Component {
         );
     }
 }
-  
+
 const CIRCLE_RADIUS = 30;
 const styles = StyleSheet.create({
     mainContainer: {
@@ -114,7 +124,7 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row'
-    },  
+    },
     dropZone: {
         height: 200,
         backgroundColor: '#00334d'

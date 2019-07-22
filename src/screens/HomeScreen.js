@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 class HomeScreen extends Component {
     render() {
         return (
-        <View style={{ flex: 1, backgroundColor: '#ddd' }}>
+        <View style={{ flex: 1, backgroundColor: '#fff' }}>
         {
             <Text>Home</Text>
         }
