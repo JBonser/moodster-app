@@ -9,31 +9,23 @@ class TodayScreen extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             selectedMarbleColor: 'white',
             selectedMarble: '',
             moodTemplate: 'unassigned',
-            moods: []
+            moods: [],
+            customUrl: '',
+            useCustomUrl: false
         };
         this.updateMarbleText = this.updateMarbleText.bind(this);
     }
 
     componentDidMount() {
-        // const moodTemplate = fetch('http://localhost:5000/mood_templates/5d86024b-1bae-42f1-8a2c-028fe18e33e0')
-        //     .then((response) => response.json())
-        //     .then((responseJson) => {
-        //         console.log(responseJson);
-        //             this.setState({
-        //                 moodTemplate: responseJson.data,
-        //             }); 
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //     });
-
+        if (!global.useCustomUrl) {
+            global.customUrl = '127.0.0.1:5000';
+        }
         //todo api needs updating to enable selecting all the moods from a particular mood template
-        return fetch('http://127.0.0.1:5000/moods/')
+        return fetch('http://' + global.customUrl + '/moods/')
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson);
@@ -49,13 +41,13 @@ class TodayScreen extends Component {
                 dummyMoods[2] = { id: 'dummyMcKenzie3', name: 'Okay', colour: '#ede357' };
                 dummyMoods[3] = { id: 'dummyMcKenzie4', name: 'Poor', colour: '#e28f53' };
                 dummyMoods[4] = { id: 'dummyMcKenzie5', name: 'Awful', colour: '#e05f4e' };
-
                 this.setState({
                     moods: dummyMoods
                 });
                 console.log(error);
             });
     }
+
     updateMarbleText(text, textColor) {
         this.setState({
             selectedMarble: text,
@@ -82,9 +74,7 @@ class TodayScreen extends Component {
                                 marbleColor={mood.colour}
                                 marbleMargin={index % 2 === 0 ? 40 : 0}
                             />,
-                        )
-
-                        }
+                        )}
                     </View>
                 </View>
                 <View style={{ alignItems: 'center' }}>
