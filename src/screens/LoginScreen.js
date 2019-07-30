@@ -53,13 +53,18 @@ export default class LoginScreen extends Component {
         await this.setState({ useCustomUrl: parsedSettings.useCustomUrl });
     }
 
-    async saveCustomUrlSettings(bool, customUrl) {
+    saveCustomUrlSettings(bool, customUrl) {
         const customUrlObj = {
             customUrl: customUrl,
             useCustomUrl: bool
         };
-        await AsyncStorage.setItem('customUrlObj', JSON.stringify(customUrlObj));
-        this.getCustomUrlSettings(); 
+        return new Promise((resolve, reject) => {
+            if (AsyncStorage.setItem('customUrlObj', JSON.stringify(customUrlObj))) {
+                resolve();
+            } else {
+                reject();
+            }
+        });
     }
 
     StartBackgroundColorAnimation = () => {
@@ -144,6 +149,7 @@ export default class LoginScreen extends Component {
                                             this.state.useCustomUrl, 
                                             this.state.customUrl
                                         )
+                                        .then(this.getCustomUrlSettings())
                                         .done(this.setUrlScreenVisible(false)); 
                                     }}
                                     title="Save"
