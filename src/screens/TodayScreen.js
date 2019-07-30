@@ -13,9 +13,7 @@ class TodayScreen extends Component {
             selectedMarbleColor: 'white',
             selectedMarble: '',
             moodTemplate: 'unassigned',
-            moods: [],
-            customUrl: '',
-            useCustomUrl: false
+            moods: []
         };
         this.updateMarbleText = this.updateMarbleText.bind(this);
     }
